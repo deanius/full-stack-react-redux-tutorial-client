@@ -1,0 +1,7 @@
+.pending {
+  border: dashed 2px black;
+}
+
+.confirmed {
+  border: solid 2px black;
+}

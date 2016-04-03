@@ -9,7 +9,9 @@ const question = {
     'Google',
     'Citibank',
     'Facebook'
-  ]
+  ],
+  playerChoice: 'AirBnb',
+  choiceState: 'pending' /* pending, confirmedFirst, confirmedQueued */
 }
 
 ReactDOM.render(
