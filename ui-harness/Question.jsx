@@ -1,5 +1,5 @@
-import React from 'react';
-import Question from '../src/components/Question';
+import React from 'react'
+import Question from '../src/components/Question'
 
 
 describe('Question', function() {
@@ -13,7 +13,7 @@ describe('Question', function() {
       'Citibank',
       'Facebook'
     ],
-    playerChoice: 'AirBnb'
+    playerChoice: 'Facebook'
   }
 
   before(() => {
@@ -21,8 +21,14 @@ describe('Question', function() {
   })
 
   section('voting', () => {
-    it('unvoted', () => this.props({ choiceState: '' }))
-    it('voted, not confirmed', () => this.props({ choiceState: 'pending' }))
-    it('voted, confirmed', () => this.props({ choiceState: 'confirmed' }))
+    it('unvoted', () => this.props({ answerState: null }))
+    it('voted, pending', () => this.props({ answerState: 'pending' }))
+    it('voted, confirmed', () => this.props({ answerState: 'confirmed' }))
+    it('voted, beaten', () => this.props({ answerState: 'beaten' }))
+  })
+
+  section('judging', () => {
+    it('correct', () => this.props({answerState: 'correct'}))
+    it('incorrect', () => this.props({answerState: 'incorrect'}))
   })
 })

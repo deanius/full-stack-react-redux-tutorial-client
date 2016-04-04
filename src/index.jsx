@@ -11,7 +11,7 @@ const question = {
     'Facebook'
   ],
   playerChoice: 'AirBnb',
-  choiceState: 'pending' /* pending, confirmedFirst, confirmedQueued */
+  answerState: 'pending'
 }
 
 ReactDOM.render(
