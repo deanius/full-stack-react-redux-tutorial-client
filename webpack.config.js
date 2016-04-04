@@ -1,5 +1,5 @@
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
+var webpack = require('webpack')
+var autoprefixer = require('autoprefixer')
 
 module.exports = {
   entry: [
@@ -36,6 +36,6 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   postcss: () => {
-    return [autoprefixer];
+    return [autoprefixer]
   }
-};
+}

@@ -1,3 +1,3 @@
 export function setEntries(state, entries) {
-  return state.merge({entries});
+  return state.merge({entries})
 }
