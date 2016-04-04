@@ -10,9 +10,10 @@
     ]
   },
   "scripts": {
-    "ui-harness": "node ./node_modules/ui-harness/start --entry ./ui-harness/index.js",
+    "lint": "eslint --ext js,jsx .",
     "start": "webpack-dev-server",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js \"test/**/*@(.js|.jsx)\""
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js \"test/**/*@(.js|.jsx)\"",
+    "ui-harness": "node ./node_modules/ui-harness/start --entry ./ui-harness/index.js"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,9 @@
     "chai": "^3.5.0",
     "chai-immutable": "^1.5.4",
     "css-loader": "^0.23.1",
+    "eslint": "^2.6.0",
+    "eslint-config-airbnb": "^6.2.0",
+    "eslint-plugin-react": "^4.2.3",
     "jsdom": "^8.2.0",
     "memory-fs": "^0.3.0",
     "mocha": "^2.4.5",

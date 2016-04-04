@@ -15,34 +15,48 @@ let disabledStyles = {
 }
 
 const choiceStyleFor = ({playerChoice, choice, answerState}) => {
-  if(playerChoice !== choice || !answerState)
-    return {}
-  else if (answerState == 'pending')
-    return answerStyles['pending']
-  else if (['confirmed', 'correct', 'incorrect'])
-    return answerStyles['final']
+  if (playerChoice !== choice) { return {} }
+
+  if (answerState === 'pending') {
+    return answerStyles.pending
+  } else if (['confirmed', 'correct', 'incorrect'].includes(answerState)) {
+    return answerStyles.final
+  }
+
+  return {}
 }
 
 const questionStyleFor = ({answerState}) => {
-  if(!answerState) return {}
+  if (!answerState) return {}
 
   return Object.assign({}, disabledStyles,
-    answerState == 'correct' ?
-    {backgroundColor: 'green'} :
-      answerState == 'incorrect' ?
-      {backgroundColor: 'red'} :
-      {}
+    (answerState === 'correct' && {backgroundColor: 'green'}) ||
+    (answerState === 'incorrect' && {backgroundColor: 'red'}) ||
+    {}
   )
 }
 
-export default ({text, choices, playerChoice, answerState}) => (
+function statusText(answerState) {
+  switch (answerState) {
+    case 'pending':
+      return <div style={{color: 'blue'}}>Sending to server...</div>
+    case 'confirmed':
+      return <div style={{color: 'green'}}>Answer received, waiting...</div>
+    case 'beaten':
+      return <div style={{color: 'red'}}>You were not the first to answer!</div>
+    case 'correct':
+      return <div style={{color: 'white'}}>You are correct!</div>
+    case 'incorrect':
+      return <div style={{color: 'white'}}>That was not correct...</div>
+    default:
+      return null
+  }
+}
+
+const Question = ({text, choices, playerChoice, answerState}) => (
   <div className="question" style={questionStyleFor({answerState})}>
     <div className="prompt">{text}</div>
-    {answerState === 'pending' && <div style={{color: 'blue'}}>Sending to server...</div>}
-    {answerState === 'confirmed' && <div style={{color: 'green'}}>Answer received, waiting...</div>}
-    {answerState === 'beaten' && <div style={{color: 'red'}}>You were not the first to answer!</div>}
-    {answerState === 'correct' && <div style={{color: 'white'}}>You are correct!</div>}
-    {answerState === 'incorrect' && <div style={{color: 'white'}}>That was not correct...</div>}
+    {statusText(answerState)}
     <div>
       {choices.map(choice =>
         <button key={choice} style={choiceStyleFor({playerChoice, choice, answerState})}>
@@ -51,5 +65,14 @@ export default ({text, choices, playerChoice, answerState}) => (
       )}
       </div>
 
-  </div>)
+  </div>
+)
 
+Question.propTypes = {
+  text: React.PropTypes.string,
+  choices: React.PropTypes.array,
+  playerChoice: React.PropTypes.string,
+  answerState: React.PropTypes.string
+}
+
+export default Question

@@ -1,6 +1,7 @@
+/*global section*/
+
 import React from 'react'
 import Question from '../src/components/Question'
-
 
 describe('Question', function() {
   this.header('## Question Styles')
@@ -17,7 +18,7 @@ describe('Question', function() {
   }
 
   before(() => {
-    this.component( <Question {...question} /> )
+    this.component(<Question {...question} />)
   })
 
   section('voting', () => {
