@@ -12,7 +12,7 @@ const questionProps = {
     'Facebook'
   ],
   playerChoice: 'AirBnb',
-  answerState: 'pending'
+  answerState: null
 }
 
 describe('Question', () => {
@@ -38,13 +38,25 @@ describe('Question', () => {
     })
   })
 
-  describe('Interactivity', () => {
+  describe('State: unanswered', () => {
     it('should call answerChosen with the answer when clicked', () => {
       wrapper.find('button').first().simulate('click')
       expect(onAnswerChosen).to.have.been.calledWith(eventObj, 'AirBnb')
 
       wrapper.find('button').at(1).simulate('click')
       expect(onAnswerChosen).to.have.been.calledWith(eventObj, 'Google')
+    })
+  })
+
+  describe('State: answered (pending)', () => {
+    it('should disallow answers once the answerState is defined', () => {
+      let props = Object.assign({},
+        questionProps,
+        {onAnswerChosen},
+        {answerState: 'pending'})
+      let wrapper = mount(<Question {...props} />)
+      wrapper.find('button').first().simulate('click')
+      expect(onAnswerChosen).to.not.have.been.called
     })
   })
 })

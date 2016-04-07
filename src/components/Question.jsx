@@ -60,7 +60,7 @@ const Question = ({text, choices, playerChoice, answerState, onAnswerChosen}) =>
     <div>
       {choices.map(choice =>
         <button key={choice} className="choice"
-          onClick={(e) => onAnswerChosen(e, choice)}
+          onClick={(e) => !answerState && onAnswerChosen(e, choice)}
           style={choiceStyleFor({playerChoice, choice, answerState})}
         >
           <h1>{choice}</h1>
