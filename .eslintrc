@@ -4,6 +4,9 @@
     node: true,
     mocha: true
   },
+  globals: {
+    expect: true
+  },
   rules: {
     semi: [2, "never"],
     no-console: 0,
@@ -12,7 +15,6 @@
     prefer-const: 0,
     comma-dangle: 0,
     func-names: 0,
-    space-before-function-paren: 0,
-
+    space-before-function-paren: 0
   }
 }

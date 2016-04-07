@@ -39,27 +39,30 @@ const questionStyleFor = ({answerState}) => {
 function statusText(answerState) {
   switch (answerState) {
     case 'pending':
-      return <div style={{color: 'blue'}}>Sending to server...</div>
+      return <span style={{color: 'blue'}}>Sending to server...</span>
     case 'confirmed':
-      return <div style={{color: 'green'}}>Answer received, waiting...</div>
+      return <span style={{color: 'green'}}>Answer received, waiting...</span>
     case 'beaten':
-      return <div style={{color: 'red'}}>You were not the first to answer!</div>
+      return <span style={{color: 'red'}}>You were not the first to answer!</span>
     case 'correct':
-      return <div style={{color: 'white'}}>You are correct!</div>
+      return <span style={{color: 'white'}}>You are correct!</span>
     case 'incorrect':
-      return <div style={{color: 'white'}}>That was not correct...</div>
+      return <span style={{color: 'white'}}>That was not correct...</span>
     default:
       return null
   }
 }
 
-const Question = ({text, choices, playerChoice, answerState}) => (
+const Question = ({text, choices, playerChoice, answerState, onAnswerChosen}) => (
   <div className="question" style={questionStyleFor({answerState})}>
     <div className="prompt">{text}</div>
-    {statusText(answerState)}
+    <div id="answerStatus" data={{answerState}}>{statusText(answerState)}</div>
     <div>
       {choices.map(choice =>
-        <button key={choice} style={choiceStyleFor({playerChoice, choice, answerState})}>
+        <button key={choice} className="choice"
+          onClick={(e) => onAnswerChosen(e, choice)}
+          style={choiceStyleFor({playerChoice, choice, answerState})}
+        >
           <h1>{choice}</h1>
         </button>
       )}
@@ -72,7 +75,8 @@ Question.propTypes = {
   text: React.PropTypes.string,
   choices: React.PropTypes.array,
   playerChoice: React.PropTypes.string,
-  answerState: React.PropTypes.string
+  answerState: React.PropTypes.string,
+  onAnswerChosen: React.PropTypes.func
 }
 
 export default Question
