@@ -11,7 +11,8 @@ const question = {
     'Facebook'
   ],
   playerChoice: 'AirBnb',
-  answerState: 'pending'
+  answerState: null,
+  onAnswerChosen: (e, choice) => console.log('TODO implement: ', choice)
 }
 
 ReactDOM.render(
