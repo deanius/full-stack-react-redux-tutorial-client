@@ -39,6 +39,7 @@
     "eslint": "^2.6.0",
     "eslint-config-airbnb": "^6.2.0",
     "eslint-plugin-react": "^4.2.3",
+    "git-hooks": "^1.0.2",
     "jsdom": "^8.2.0",
     "memory-fs": "^0.3.0",
     "mocha": "^2.4.5",
