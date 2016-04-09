@@ -13,19 +13,9 @@ describe('data/reducer', () => {
 })
 
 describe('actions', () => {
-  let setState = actions.setState({foo: 'bar'})
   let randomAnswer = actions.chooseAnswer({playerId: NaN, questionId: 5, answer: 'wakawaka'})
   // let correctAnswer = actions.chooseAnswer({playerId: NaN, questionId: 5, answer: 'me drum'})
   // let judgeAnswers = actions.judgeAnswers({questionId: 5, answer: 'ribbit'})
-
-  describe('setState', () => {
-    it('should merge the new state with the old', () => {
-      const action = setState
-      const nextState = reducer(undefined, action)
-
-      expect(nextState.get('foo')).to.equal('bar')
-    })
-  })
 
   describe('chooseAnswer', () => {
     it('should add the {questionId, choice} to the list of pending answers', () => {
