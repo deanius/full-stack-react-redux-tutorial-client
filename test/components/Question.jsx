@@ -15,7 +15,7 @@ const questionProps = {
   answerState: null
 }
 
-describe('Question', () => {
+describe('components/Question', () => {
   let subject
   let wrapper
   let onAnswerChosen
