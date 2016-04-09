@@ -142,6 +142,7 @@ export let questionStatus = {
 }
 
 export let questionProps = {
+  id: 1,
   text: 'What company made React?',
   choices: [
     'AirBnb',
