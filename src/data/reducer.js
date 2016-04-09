@@ -6,22 +6,32 @@ function setState(state, newState) {
   return state.merge(newState)
 }
 
+function chooseAnswer(state, {playerId, questionId, answer}) {
+  return state
+    .updateIn(['round', 'pendingAnswers'], answers =>
+      answers.push(new Map({
+        playerId,
+        questionId,
+        answer
+      })))
+}
+
 export default function(state = fromJS(examples.serverInitial), action) {
   switch (action.type) {
     case actionTypes.SET_STATE: {
       return setState(state, action.state)
     }
     case actionTypes.CHOOSE_ANSWER: {
-      return state
-        .updateIn(['round', 'pendingAnswers'], others =>
-          others.push(new Map({
-            playerId: NaN,
-            questionId: action.questionId,
-            answer: action.answer
-          }))
-        )
+      return chooseAnswer(state, action)
     }
     default:
       return state
   }
 }
+
+// begin app development
+// function questionsAnsweredCorrectlyByUser() {
+//   let snap = serverSnapshot;
+//   return snap.questionHistory.filter(q => q.correctPlayerId == snap.game.players[0].id)
+// }
+

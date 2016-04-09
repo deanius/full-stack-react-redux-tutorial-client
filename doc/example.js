@@ -36,28 +36,28 @@ export let recordedPlayerAnswer = {
 
 export let round = {
   currentQuestionId: NaN,
-  pendingAnswers: []
+  pendingAnswers: [] // [playerAnswer|recordedPlayerAnswer]
 }
 
 export let questionHistory = [
   {
     questionId: NaN,
     correctPlayerId: NaN,
-    answerHistory: [recordedPlayerAnswer] // playerAnswers
+    answerHistory: [] // [recordedPlayerAnswer]
   }
 ]
 
 export let serverInitial = {
   game: {
-    players: [],
-    questions: [],
-    scores: {}
+    players: [],   // [player]
+    questions: [], // [question]
+    scores: {}     // {playerId: int}
   },
   round: {
     currentQuestionId: NaN,
-    pendingAnswers: []
+    pendingAnswers: [] // [playerAnswer|recordedPlayerAnswer]
   },
-  history: [] // {questionId, correctPlayerId, [{playerId, answer, timestamp}]}
+  questionHistory: [] // [questionHistory]
 }
 
 
@@ -130,10 +130,4 @@ export let serverSnapshot = {
       ]
     }
   ]
-}
-
-// begin app development
-export function questionsAnsweredCorrectlyByUser() {
-  let snap = serverSnapshot;
-  return snap.questionHistory.filter(q => q.correctPlayerId == snap.game.players[0].id)
 }

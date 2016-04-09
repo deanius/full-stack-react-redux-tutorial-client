@@ -13,31 +13,37 @@ describe('data/reducer', () => {
 })
 
 describe('actions', () => {
+  let setState = actions.setState({foo: 'bar'})
+  let randomAnswer = actions.chooseAnswer({playerId: NaN, questionId: 5, answer: 'wakawaka'})
+  // let correctAnswer = actions.chooseAnswer({playerId: NaN, questionId: 5, answer: 'me drum'})
+  // let judgeAnswers = actions.judgeAnswers({questionId: 5, answer: 'ribbit'})
+
   describe('setState', () => {
     it('should merge the new state with the old', () => {
-      const action = actions.setState({foo: 'bar'})
+      const action = setState
       const nextState = reducer(undefined, action)
 
-      expect(nextState.has('foo')).to.be.ok // XXX would prefer expect(nextState).to.have.key('foo')
+      expect(nextState.get('foo')).to.equal('bar')
     })
   })
 
   describe('chooseAnswer', () => {
     it('should add the {questionId, choice} to the list of pending answers', () => {
-      const action = actions.chooseAnswer({questionId: 5, answer: 'wakawaka'})
+      const action = randomAnswer
       const nextState = reducer(undefined, action)
 
       const pendingAnswer = nextState.get('round').get('pendingAnswers').get(0)
 
-      expect(pendingAnswer.get('questionId')).to.equal(5)
-      expect(pendingAnswer.get('answer')).to.equal('wakawaka')
-
-      // below could be over-asserting as this test is not in control of playerId
       expect(pendingAnswer).to.equal(fromJS({
-        questionId: 5,
-        answer: 'wakawaka',
-        playerId: NaN
+        questionId: randomAnswer.questionId,
+        answer: randomAnswer.answer,
+        playerId: randomAnswer.playerId
       }))
     })
+  })
+
+  describe('judgeAnswers', () => {
+    it('should update history')
+    it('should update scores of players')
   })
 })
