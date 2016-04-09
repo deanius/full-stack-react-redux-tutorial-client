@@ -1,4 +1,4 @@
-import {fromJS} from 'immutable'
+import {fromJS, Map} from 'immutable'
 import * as examples from '../../doc/example'
 import * as actionTypes from '../actions/index'
 
@@ -14,11 +14,11 @@ export default function(state = fromJS(examples.serverInitial), action) {
     case actionTypes.CHOOSE_ANSWER: {
       return state
         .updateIn(['round', 'pendingAnswers'], others =>
-          others.push({
+          others.push(new Map({
             playerId: NaN,
             questionId: action.questionId,
             answer: action.answer
-          })
+          }))
         )
     }
     default:

@@ -28,8 +28,8 @@ describe('actions', () => {
       const nextState = reducer(undefined, action)
 
       const pendingAnswer = nextState.get('round').get('pendingAnswers').get(0)
-      expect(pendingAnswer).to.have.property('questionId', 5)
-      expect(pendingAnswer).to.have.property('answer', 'wakawaka')
+      expect(pendingAnswer.get('questionId')).to.equal(5)
+      expect(pendingAnswer.get('answer')).to.equal('wakawaka')
     })
   })
 })
