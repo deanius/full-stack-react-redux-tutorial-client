@@ -10,8 +10,10 @@ describe('data/reducer', () => {
 
     expect(nextState).to.equal(fromJS(examples.serverInitial))
   })
+})
 
-  describe('actions/setState', () => {
+describe('actions', () => {
+  describe('setState', () => {
     it('should merge the new state with the old', () => {
       const action = actions.setState({foo: 'bar'})
       const nextState = reducer(undefined, action)
@@ -20,9 +22,14 @@ describe('data/reducer', () => {
     })
   })
 
-  it('is initialized with an empty game', () => {
-    const nextState = reducer(undefined, {})
+  describe('chooseAnswer', () => {
+    it('should add the {questionId, choice} to the list of pending answers', () => {
+      const action = actions.chooseAnswer({questionId: 5, answer: 'wakawaka'})
+      const nextState = reducer(undefined, action)
 
-    expect(nextState).to.equal(fromJS(examples.serverInitial))
+      const pendingAnswer = nextState.get('round').get('pendingAnswers').get(0)
+      expect(pendingAnswer).to.have.property('questionId', 5)
+      expect(pendingAnswer).to.have.property('answer', 'wakawaka')
+    })
   })
 })

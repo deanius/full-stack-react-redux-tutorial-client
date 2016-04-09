@@ -11,6 +11,16 @@ export default function(state = fromJS(examples.serverInitial), action) {
     case actionTypes.SET_STATE: {
       return setState(state, action.state)
     }
+    case actionTypes.CHOOSE_ANSWER: {
+      return state
+        .updateIn(['round', 'pendingAnswers'], others =>
+          others.push({
+            playerId: NaN,
+            questionId: action.questionId,
+            answer: action.answer
+          })
+        )
+    }
     default:
       return state
   }
