@@ -18,6 +18,6 @@ Object.keys(window).forEach((key) => {
   }
 })
 
-chai.use(chaiImmutable)
-chai.use(chaiEnzyme())
-chai.use(sinonChai)
+chai.use(chaiImmutable) // better comparison of maps
+chai.use(chaiEnzyme())  // better comparison of JSX trees
+chai.use(sinonChai)     // better assertions on function spies

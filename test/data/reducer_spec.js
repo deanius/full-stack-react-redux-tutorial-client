@@ -28,8 +28,16 @@ describe('actions', () => {
       const nextState = reducer(undefined, action)
 
       const pendingAnswer = nextState.get('round').get('pendingAnswers').get(0)
+
       expect(pendingAnswer.get('questionId')).to.equal(5)
       expect(pendingAnswer.get('answer')).to.equal('wakawaka')
+
+      // below could be over-asserting as this test is not in control of playerId
+      expect(pendingAnswer).to.equal(fromJS({
+        questionId: 5,
+        answer: 'wakawaka',
+        playerId: NaN
+      }))
     })
   })
 })
