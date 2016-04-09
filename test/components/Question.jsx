@@ -2,18 +2,7 @@ import React from 'react'
 import {mount} from 'enzyme'
 import Question from '../../src/components/Question'
 import sinon from 'sinon'
-
-const questionProps = {
-  text: 'What company made React?',
-  choices: [
-    'AirBnb',
-    'Google',
-    'Citibank',
-    'Facebook'
-  ],
-  playerChoice: 'AirBnb',
-  answerState: null
-}
+import {questionProps, questionStatus} from '../../doc/example'
 
 describe('components/Question', () => {
   let subject
@@ -53,7 +42,7 @@ describe('components/Question', () => {
       let props = Object.assign({},
         questionProps,
         {onAnswerChosen},
-        {answerState: 'pending'})
+        {answerState: questionStatus.PENDING})
       let wrapper = mount(<Question {...props} />)
       wrapper.find('button').first().simulate('click')
       expect(onAnswerChosen).to.not.have.been.called

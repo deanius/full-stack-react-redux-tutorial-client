@@ -8,15 +8,15 @@ export let player = {
 export let question = {
   id: NaN,
   text: "",
-  choices: [], //strings
-  correctAnswer: "" //string
+  choices: [],                  //strings
+  correctAnswer: ""             //string
 }
 
 // client
 export let clientQuestion = {
   id: NaN,
   text: "",
-  choices: [] //strings
+  choices: []                   //strings
 }
 
 // client
@@ -36,28 +36,28 @@ export let recordedPlayerAnswer = {
 
 export let round = {
   currentQuestionId: NaN,
-  pendingAnswers: [] // [playerAnswer|recordedPlayerAnswer]
+  pendingAnswers: []            // [playerAnswer|recordedPlayerAnswer]
 }
 
 export let questionHistory = [
   {
     questionId: NaN,
     correctPlayerId: NaN,
-    answerHistory: [] // [recordedPlayerAnswer]
+    answerHistory: []           // [recordedPlayerAnswer]
   }
 ]
 
 export let serverInitial = {
   game: {
-    players: [],   // [player]
-    questions: [], // [question]
-    scores: {}     // {playerId: int}
+    players: [],                // [player]
+    questions: [],              // [question]
+    scores: {}                  // {playerId: int}
   },
   round: {
     currentQuestionId: NaN,
-    pendingAnswers: [] // [playerAnswer|recordedPlayerAnswer]
+    pendingAnswers: []          // [playerAnswer|recordedPlayerAnswer]
   },
-  questionHistory: [] // [questionHistory]
+  questionHistory: []           // [questionHistory]
 }
 
 
@@ -108,7 +108,7 @@ export let serverSnapshot = {
       {
         playerId: 2,
         answer: "Google",
-        timestamp: "2014-12-10 14:46:00 GMT-0600" // assigned by server when it arrives
+        timestamp: "2014-12-10 14:46:00 GMT-0600" // assigned by server
       }
     ]
   },
@@ -130,4 +130,25 @@ export let serverSnapshot = {
       ]
     }
   ]
+}
+
+export let questionStatus = {
+  NEW: null,
+  PENDING: 'pending',
+  CONFIRMED: 'confirmed',
+  BEATEN: 'beaten',
+  CORRECT: 'correct',
+  INCORRECT: 'incorrect'
+}
+
+export let questionProps = {
+  text: 'What company made React?',
+  choices: [
+    'AirBnb',
+    'Google',
+    'Citibank',
+    'Facebook'
+  ],
+  playerChoice: 'AirBnb',
+  answerState: null             // questionStatus
 }
