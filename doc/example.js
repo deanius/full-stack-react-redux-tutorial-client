@@ -35,8 +35,8 @@ export let recordedPlayerAnswer = {
 }
 
 export let round = {
-  currentQuestionId: NaN,
-  pendingAnswers: []            // [playerAnswer|recordedPlayerAnswer]
+  questionId: NaN,
+  answers: []                   // [playerAnswer|recordedPlayerAnswer]
 }
 
 export let questionHistory = [
@@ -54,8 +54,8 @@ export let serverInitial = {
     scores: {}                  // {playerId: int}
   },
   round: {
-    currentQuestionId: NaN,
-    pendingAnswers: []          // [playerAnswer|recordedPlayerAnswer]
+    questionId: NaN,
+    answers: []                 // [playerAnswer|recordedPlayerAnswer]
   },
   questionHistory: []           // [questionHistory]
 }
@@ -103,8 +103,8 @@ export let serverSnapshot = {
     }
   },
   round: {
-    currentQuestionId: 2,
-    pendingAnswers: [
+    questionId: 2,
+    answers: [
       {
         playerId: 2,
         answer: "Google",
@@ -152,4 +152,17 @@ export let questionProps = {
   ],
   playerChoice: 'AirBnb',
   answerState: null             // questionStatus
+}
+
+export let clientSnapshotPending = {
+  round: {
+    questionId: 2,
+    answers: [
+      {
+        playerId: 1,
+        answer: 'Facebook',
+        timestamp: null         // no timestamp - server hasn't seen it
+      }
+    ]
+  }
 }

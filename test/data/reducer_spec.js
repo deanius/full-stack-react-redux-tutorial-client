@@ -22,7 +22,7 @@ describe('actions', () => {
       const action = randomAnswer
       const nextState = reducer(undefined, action)
 
-      const pendingAnswer = nextState.get('round').get('pendingAnswers').get(0)
+      const pendingAnswer = nextState.get('round').get('answers').get(0)
 
       expect(pendingAnswer).to.equal(fromJS({
         questionId: randomAnswer.questionId,

@@ -4,7 +4,7 @@ import * as actionTypes from '../actions/index'
 
 function chooseAnswer(state, {playerId, questionId, answer}) {
   return state
-    .updateIn(['round', 'pendingAnswers'], answers =>
+    .updateIn(['round', 'answers'], answers =>
       answers.push(new Map({
         playerId,
         questionId,
