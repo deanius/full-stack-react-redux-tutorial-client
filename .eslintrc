@@ -17,6 +17,8 @@
     func-names: 0,
     space-before-function-paren: 0,
     no-shadow: 0,
-    no-unused-expressions: 0
+    no-unused-expressions: 0,
+    no-unused-vars: 1,
+    no-else-return: 0
   }
 }

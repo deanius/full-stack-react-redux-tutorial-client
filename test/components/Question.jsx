@@ -2,17 +2,19 @@ import React from 'react'
 import {mount} from 'enzyme'
 import Question from '../../src/components/Question'
 import sinon from 'sinon'
-import {questionProps, questionStatus} from '../../doc/example'
+import examples from '../../doc/example'
 
 describe('components/Question', () => {
   let subject
   let wrapper
   let onAnswerChosen
-  const eventObj = sinon.match.object
+  let questionProps = examples.client.questionProps
 
   beforeEach(() => {
     onAnswerChosen = sinon.spy()
-    const testProps = Object.assign({}, questionProps, {onAnswerChosen})
+    const testProps = Object.assign({},
+        questionProps,
+        {onAnswerChosen})
     subject = <Question {...testProps} />
     wrapper = mount(subject)
   })
@@ -27,25 +29,32 @@ describe('components/Question', () => {
     })
   })
 
-  describe('State: unanswered', () => {
+  describe('Events', () => {
     it('should call answerChosen with the answer when clicked', () => {
       wrapper.find('button').first().simulate('click')
-      expect(onAnswerChosen).to.have.been.calledWith(eventObj, 'AirBnb')
+      expect(onAnswerChosen).to.have.been.calledWith(sinon.match.object, 'AirBnb')
 
       wrapper.find('button').at(1).simulate('click')
-      expect(onAnswerChosen).to.have.been.calledWith(eventObj, 'Google')
+      expect(onAnswerChosen).to.have.been.calledWith(sinon.match.object, 'Google')
     })
   })
 
-  describe('State: answered (pending)', () => {
+  describe('State: unanswered', () => {
+  })
+
+  describe('State: answered', () => {
     it('should disallow answers once the answerState is defined', () => {
       let props = Object.assign({},
         questionProps,
         {onAnswerChosen},
-        {answerState: questionStatus.PENDING})
+        {playerAnswer: 'something'})
       let wrapper = mount(<Question {...props} />)
       wrapper.find('button').first().simulate('click')
       expect(onAnswerChosen).to.not.have.been.called
+    })
+
+    describe('State: pending', () => {
+      it('should show pending answer')
     })
   })
 })

@@ -1,13 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Question from './components/Question'
-import {questionProps} from '../doc/example'
+import examples from '../doc/example'
 
-const question = Object.assign({}, questionProps, {
-  onAnswerChosen: (e, choice) => console.log('TODO implement: ', choice)
-})
+const questionProps = examples.client.questionProps
 
 ReactDOM.render(
-  <Question {...question} />,
+  <Question {...questionProps} />,
   document.getElementById('app')
 )

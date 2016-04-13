@@ -14,68 +14,47 @@ let disabledStyles = {
   cursor: 'pointer'
 }
 
-const choiceStyleFor = ({playerChoice, choice, answerState}) => {
-  if (playerChoice !== choice) { return {} }
-
-  if (answerState === 'pending') {
-    return answerStyles.pending
-  } else if (['confirmed', 'correct', 'incorrect'].includes(answerState)) {
-    return answerStyles.final
+function displayStyle(choice, {playerAnswer, receivedAt, isFirst, isCorrect}) {
+  if (!playerAnswer || playerAnswer !== choice) {
+    return {}
   }
 
-  return {}
+  if (!receivedAt) {
+    return answerStyles.pending
+  } else {
+    return answerStyles.final
+  }
 }
 
-const questionStyleFor = ({answerState}) => {
-  if (!answerState) return {}
-
-  return Object.assign({}, disabledStyles,
-    (answerState === 'correct' && {backgroundColor: 'green'}) ||
-    (answerState === 'incorrect' && {backgroundColor: 'red'}) ||
-    {}
+const Question = (props) => {
+  let {text, choices, playerAnswer, onAnswerChosen} = props
+  return (
+    <div className="question">
+      <div className="prompt">{text}</div>
+      <div>
+        {choices.map(choice =>
+          <button key={choice}
+            className="choice"
+            style={displayStyle(choice, props)}
+            onClick={(e) => !playerAnswer && onAnswerChosen(e, choice)}
+          >
+            <h1>{choice}</h1>
+          </button>
+        )}
+      </div>
+    </div>
   )
 }
 
-function statusText(answerState) {
-  switch (answerState) {
-    case 'pending':
-      return <span style={{color: 'blue'}}>Sending to server...</span>
-    case 'confirmed':
-      return <span style={{color: 'green'}}>Answer received, waiting...</span>
-    case 'beaten':
-      return <span style={{color: 'red'}}>You were not the first to answer!</span>
-    case 'correct':
-      return <span style={{color: 'white'}}>You are correct!</span>
-    case 'incorrect':
-      return <span style={{color: 'white'}}>That was not correct...</span>
-    default:
-      return null
-  }
-}
-
-const Question = ({text, choices, playerChoice, answerState, onAnswerChosen}) => (
-  <div className="question" style={questionStyleFor({answerState})}>
-    <div className="prompt">{text}</div>
-    <div id="answerStatus" data={{answerState}}>{statusText(answerState)}</div>
-    <div>
-      {choices.map(choice =>
-        <button key={choice} className="choice"
-          onClick={(e) => !answerState && onAnswerChosen(e, choice)}
-          style={choiceStyleFor({playerChoice, choice, answerState})}
-        >
-          <h1>{choice}</h1>
-        </button>
-      )}
-      </div>
-
-  </div>
-)
-
 Question.propTypes = {
-  text: React.PropTypes.string,
-  choices: React.PropTypes.array,
-  playerChoice: React.PropTypes.string,
-  answerState: React.PropTypes.string,
+  id: React.PropTypes.number,
+  text: React.PropTypes.string.isRequired,
+  choices: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  playerAnswer: React.PropTypes.string,
+  receivedAt: React.PropTypes.instanceOf(Date),
+  isFirst: React.PropTypes.bool,
+  isCorrect: React.PropTypes.bool,
+  correctAnswer: React.PropTypes.string,
   onAnswerChosen: React.PropTypes.func
 }
 

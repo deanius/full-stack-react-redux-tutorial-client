@@ -8,10 +8,9 @@ export function setState(newState) {
   }
 }
 
-export function chooseAnswer({playerId, questionId, answer}) {
+export function chooseAnswer({questionId, answer}) {
   return {
     type: CHOOSE_ANSWER,
-    playerId,
     questionId,
     answer
   }

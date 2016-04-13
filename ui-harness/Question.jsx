@@ -2,30 +2,39 @@
 
 import React from 'react'
 import Question from '../src/components/Question'
+import example from '../doc/example'
 
 describe('Question', function() {
   this.header('## Question Styles')
 
-  const question = {
-    text: 'What company made React?',
-    choices: [
-      'AirBnb',
-      'Google',
-      'Citibank',
-      'Facebook'
-    ],
-    playerChoice: 'Facebook'
-  }
+  const questionProps = example.client.questionProps
 
   before(() => {
-    this.component(<Question {...question} />)
+    this.component(<Question {...questionProps} />)
   })
 
   section('voting', () => {
-    it('unvoted', () => this.props({ answerState: null }))
-    it('voted, pending', () => this.props({ answerState: 'pending' }))
-    it('voted, confirmed', () => this.props({ answerState: 'confirmed' }))
-    it('voted, beaten', () => this.props({ answerState: 'beaten' }))
+    it('unvoted', () => {})
+
+    it('voted, pending', () => {
+      this.props({
+        playerAnswer: 'Facebook'
+      })
+    })
+    it('voted, confirmed', () => {
+      this.props({
+        playerAnswer: 'Facebook',
+        receivedAt: new Date('2012-01-01'),
+        isFirst: true
+      })
+    })
+    it('voted, beaten', () => {
+      this.props({
+        playerAnswer: 'Facebook',
+        receivedAt: new Date('2012-01-01'),
+        isFirst: false
+      })
+    })
   })
 
   section('judging', () => {
