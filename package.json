@@ -18,8 +18,7 @@
     "start": "webpack-dev-server",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js \"test/**/*@(.js|.jsx)\"",
     "test:watch": "npm run test -- --watch",
-    "test:e2e": "nightwatch",
-    "ui-harness": "node ./node_modules/ui-harness/start --entry ./ui-harness/index.js"
+    "test:e2e": "nightwatch"
   },
   "keywords": [],
   "author": "",
@@ -52,7 +51,6 @@
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.13.1",
-    "ui-harness": "^3.7.6",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },

@@ -1,5 +1,4 @@
 dist/
 doc/
 webpack.config.js
-ui-harness/
 test/endToEnd/
