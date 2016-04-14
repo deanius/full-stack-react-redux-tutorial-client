@@ -5,7 +5,7 @@ import Question from '../src/components/Question'
 import examples from '../doc/examples'
 
 describe('Question', () => {
-  this.header('## Question Styles')
+  // this.header('## Question Styles')
 
   const questionProps = examples.client.questionProps
 
@@ -17,7 +17,6 @@ describe('Question', () => {
     it('unanswered', () => {
       this.props(examples.answers.unanswered)
     })
-
     it('answered, pending', () => {
       this.props(examples.answers.pending)
     })

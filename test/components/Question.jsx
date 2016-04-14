@@ -12,9 +12,7 @@ describe('components/Question', () => {
 
   beforeEach(() => {
     onAnswerChosen = sinon.spy()
-    const testProps = Object.assign({},
-        questionProps,
-        {onAnswerChosen})
+    const testProps = {...questionProps, onAnswerChosen}
     subject = <Question {...testProps} />
     wrapper = mount(subject)
   })
@@ -44,10 +42,7 @@ describe('components/Question', () => {
 
   describe('State: answered', () => {
     it('should disallow answers once the answerState is defined', () => {
-      let props = Object.assign({},
-        questionProps,
-        {onAnswerChosen},
-        {playerAnswer: 'something'})
+      let props = {...questionProps, onAnswerChosen, playerAnswer: 'something'}
       let wrapper = mount(<Question {...props} />)
       wrapper.find('button').first().simulate('click')
       expect(onAnswerChosen).to.not.have.been.called
