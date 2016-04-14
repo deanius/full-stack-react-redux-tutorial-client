@@ -2,7 +2,7 @@ import React from 'react'
 import {mount} from 'enzyme'
 import Question from '../../src/components/Question'
 import sinon from 'sinon'
-import examples from '../../doc/example'
+import examples from '../../doc/examples'
 
 describe('components/Question', () => {
   let subject

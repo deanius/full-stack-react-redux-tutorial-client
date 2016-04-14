@@ -1,4 +1,5 @@
 import React from 'react'
+import {assign} from 'lodash'
 
 let answerStyles = {
   pending: {
@@ -15,14 +16,18 @@ let disabledStyles = {
 }
 
 function displayStyle(choice, {playerAnswer, receivedAt, isFirst, isCorrect}) {
-  if (!playerAnswer || playerAnswer !== choice) {
+  if (!playerAnswer) {
     return {}
   }
 
+  if (choice !== playerAnswer) {
+    return disabledStyles
+  }
+
   if (!receivedAt) {
-    return answerStyles.pending
+    return assign({}, answerStyles.pending, disabledStyles)
   } else {
-    return answerStyles.final
+    return assign({}, answerStyles.final, disabledStyles)
   }
 }
 

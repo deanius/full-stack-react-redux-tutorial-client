@@ -2,43 +2,35 @@
 
 import React from 'react'
 import Question from '../src/components/Question'
-import example from '../doc/example'
+import examples from '../doc/examples'
 
-describe('Question', function() {
+describe('Question', () => {
   this.header('## Question Styles')
 
-  const questionProps = example.client.questionProps
+  const questionProps = examples.client.questionProps
 
   before(() => {
     this.component(<Question {...questionProps} />)
   })
 
-  section('voting', () => {
-    it('unvoted', () => {})
-
-    it('voted, pending', () => {
-      this.props({
-        playerAnswer: 'Facebook'
-      })
+  section('answering', () => {
+    it('unanswered', () => {
+      this.props(examples.answers.unanswered)
     })
-    it('voted, confirmed', () => {
-      this.props({
-        playerAnswer: 'Facebook',
-        receivedAt: new Date('2012-01-01'),
-        isFirst: true
-      })
+
+    it('answered, pending', () => {
+      this.props(examples.answers.pending)
+    })
+    it('answered, received', () => {
+      this.props(examples.answers.received)
     })
     it('voted, beaten', () => {
-      this.props({
-        playerAnswer: 'Facebook',
-        receivedAt: new Date('2012-01-01'),
-        isFirst: false
-      })
+      this.props(examples.answers.beaten)
     })
   })
 
   section('judging', () => {
-    it('correct', () => this.props({answerState: 'correct'}))
-    it('incorrect', () => this.props({answerState: 'incorrect'}))
+    it('correct', () => this.props(examples.answers.correct))
+    it('incorrect', () => this.props(examples.answers.incorrect))
   })
 })

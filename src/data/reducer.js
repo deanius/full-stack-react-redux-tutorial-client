@@ -1,4 +1,4 @@
-import * as examples from '../../doc/example'
+import * as examples from '../../doc/examples'
 import * as actionTypes from '../actions/index'
 
 function chooseAnswer(state, {playerId, questionId, answer}) {
