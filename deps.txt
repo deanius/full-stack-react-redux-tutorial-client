@@ -1,0 +1,9 @@
+Provider
+  Router
+    <Route component={App}>
+      <Route path="/" component={VotingContainer} />
+      <Route path="/results" component={ResultsContainer} />
+    </Route>;
+
+Voting: winner | vote
+Reults: winner | (tally + management)

@@ -22,6 +22,17 @@ export const Results = React.createClass({
     return this.props.winner ?
       <Winner ref="winner" winner={this.props.winner} /> :
       <div className="results">
+        <div className="management">
+          <button ref="restart"
+                  onClick={this.props.restart}>
+            Restart
+          </button>
+          <button ref="next"
+                  className="next"
+                  onClick={this.props.next}>
+            Next
+          </button>
+        </div>
         <div className="tally">
           {this.getPair().map(entry =>
             <div key={entry} className="entry">
@@ -36,17 +47,6 @@ export const Results = React.createClass({
               </div>
             </div>
           )}
-        </div>
-        <div className="management">
-          <button ref="restart"
-                  onClick={this.props.restart}>
-            Restart
-          </button>
-          <button ref="next"
-                  className="next"
-                  onClick={this.props.next}>
-            Next
-          </button>
         </div>
       </div>;
   }

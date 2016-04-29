@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --host 0.0.0.0 --port 3120",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js \"test/**/*@(.js|.jsx)\""
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js \"test/**/*@(.js|.jsx)\"",
+    "deps": "cat deps.txt #echo Will run 'madge -b -f es6 src/ -e jsx,js -i dependencies.png' when madge is patched"
   },
   "author": "",
   "license": "ISC",
